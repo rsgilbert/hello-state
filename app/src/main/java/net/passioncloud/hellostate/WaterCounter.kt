@@ -23,9 +23,22 @@ fun WellnessScreenPreview() {
     }
 }
 
+
+private fun getWellnessTasks() : List<WellnessTask> = List(30) { i ->
+    WellnessTask(i, "Task # $i")
+}
+
+
 @Composable
 fun WellnessScreen(modifier: Modifier = Modifier) {
     StatefulCounter(modifier)
+
+    val list = remember { getWellnessTasks().toMutableStateList() }
+
+    WellnessTaskItemList(
+        list = list,
+        onCloseTask=list::remove
+    )
 }
 
 @Composable
@@ -53,15 +66,6 @@ fun WaterCounter(modifier: Modifier = Modifier) {
                 Text("Add one")
             }
 
-            Button(
-                onClick = {
-                    count--
-                },
-                modifier = Modifier.padding(top = 8.dp),
-                enabled = count > 0
-            ) {
-                Text("Minus one")
-            }
             Button(
                 onClick = { count = 0 }
             ) {
