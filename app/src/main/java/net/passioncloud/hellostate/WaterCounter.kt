@@ -15,31 +15,7 @@ import androidx.compose.ui.unit.dp
 import net.passioncloud.hellostate.ui.theme.HelloStateTheme
 
 
-@Preview
-@Composable
-fun WellnessScreenPreview() {
-    HelloStateTheme {
-        WellnessScreen()
-    }
-}
 
-
-private fun getWellnessTasks() : List<WellnessTask> = List(30) { i ->
-    WellnessTask(i, "Task # $i")
-}
-
-
-@Composable
-fun WellnessScreen(modifier: Modifier = Modifier) {
-    StatefulCounter(modifier)
-
-    val list = remember { getWellnessTasks().toMutableStateList() }
-
-    WellnessTaskItemList(
-        list = list,
-        onCloseTask=list::remove
-    )
-}
 
 @Composable
 fun WaterCounter(modifier: Modifier = Modifier) {

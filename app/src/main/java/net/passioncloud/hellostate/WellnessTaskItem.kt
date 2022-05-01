@@ -21,22 +21,22 @@ import net.passioncloud.hellostate.ui.theme.HelloStateTheme
 @Composable
 fun WellnessTaskItemPreview() {
     HelloStateTheme {
-        WellnessTaskItem(taskName = "sleep", onClose = {})
+        WellnessTaskItem(wellnessTask = WellnessTask(3, "Movie"), onClose = {}, onCheckedChange = {})
     }
 }
 
 
 @Composable
 fun WellnessTaskItem(
-    taskName: String,
+    wellnessTask: WellnessTask,
     onClose: () -> Unit,
+    onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var checkedState by rememberSaveable { mutableStateOf(true) }
     WellnessTaskItem(
-        taskName = taskName,
-        checked = checkedState,
-        onCheckedChange = {  checkedState = it  },
+        taskName = wellnessTask.label,
+        checked = wellnessTask.checked,
+        onCheckedChange = onCheckedChange,
         onClose = onClose,
         modifier=modifier
     )

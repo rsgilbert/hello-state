@@ -3,25 +3,15 @@ package net.passioncloud.hellostate
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import net.passioncloud.hellostate.ui.theme.HelloStateTheme
 
-//
-//@Preview
-//@Composable
-//fun WellnessTaskItemListPreview() {
-//    HelloStateTheme {
-//        WellnessTaskItemList()
-//    }
-//}
 
 @Composable
 fun WellnessTaskItemList(
     modifier: Modifier = Modifier,
     list: List<WellnessTask>,
-    onCloseTask: (item: WellnessTask) -> Unit
+    onCloseTask: (item: WellnessTask) -> Unit,
+    onCheckedChange: (item: WellnessTask, checked: Boolean) -> Unit
 ) {
     LazyColumn(modifier=modifier) {
         items(
@@ -29,9 +19,10 @@ fun WellnessTaskItemList(
             key=WellnessTask::id
         ) { item ->
             WellnessTaskItem(
-                item.label,
+                item,
                 modifier=modifier,
-                onClose={onCloseTask(item)}
+                onClose={onCloseTask(item)},
+                onCheckedChange={onCheckedChange(item, it)}
             )
         }
     }
