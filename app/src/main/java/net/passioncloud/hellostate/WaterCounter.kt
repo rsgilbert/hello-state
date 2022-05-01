@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 
 
 import androidx.compose.ui.Modifier
@@ -24,21 +25,15 @@ fun WellnessScreenPreview() {
 
 @Composable
 fun WellnessScreen(modifier: Modifier = Modifier) {
-    WaterCounter(modifier)
+    StatefulCounter(modifier)
 }
 
 @Composable
 fun WaterCounter(modifier: Modifier = Modifier) {
     Column {
-        var count by remember { mutableStateOf(0) }
+        var count by rememberSaveable { mutableStateOf(0) }
 
         if (count > 0) {
-            var showTask by remember { mutableStateOf(true) } // will be forgotten when count == 0
-            if (showTask) {
-                WellnessTaskItem(
-                    taskName = "Have you done a walk",
-                    onClose = { showTask = false })
-            }
             Text(
                 text = "You have had $count glasses.",
                 modifier = modifier.padding(16.dp)
