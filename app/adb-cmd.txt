@@ -1,0 +1,14 @@
+// Make phone listen on port 5555
+adb tcpip 5555
+
+// See phone's network configuration
+adb shell ifconfig
+
+// Connect to a phone remotely through wifi network
+adb connect 192.168.163.251:5555
+
+
+
+
+
+
